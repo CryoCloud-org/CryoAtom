@@ -5,20 +5,19 @@ channels:
 #  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 #  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 #  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-  - pytorch
-  - nvidia
   - conda-forge
 dependencies:
   - python=3.9
   - numpy=1.21.5
-  - cudatoolkit=11.8
-  - pytorch::pytorch=2.1.0=py3.9_cuda11.8_cudnn8.7.0_0
-  - pytorch::torchvision=0.16.0=py39_cu118
-  - pytorch::torchaudio=2.1.0=py39_cu118
-  - mkl=2023.0.0
   - tqdm
   - pip
   - pip:
+      # CUDA 12.8 build: runs on NVIDIA drivers from 525 up and on Blackwell GPUs (sm_120). The wheels bring
+      # their own CUDA libraries. 2.8.0 is the newest torch with Python 3.9 wheels.
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.8.0+cu128
+      - torchvision==0.23.0+cu128
+      - torchaudio==2.8.0+cu128
       - einops==0.6.0
       - scipy==1.7.3
       - biopython==1.81
